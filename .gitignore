@@ -1,2 +1,7 @@
 
 .vs/**/*
+KerbalStore/node_modules/**/*
+bin/
+obj/
+*/wwwroot/ClientApp/
+*/wwwroot/lib/
