@@ -22,8 +22,12 @@
                 <td colspan="3" class="text-right">Subtotal:</td>
                 <td>{{data.Order.subtotal | currency:"GBP":true}}</td>
             </tr>
+            <tr>
+                <td><a routerLink="" class="btn btn-default">Back</a></td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-success" (click)="onPlaceOrder()">Place Order</button></td>
+            </tr>
         </tfoot>
     </table>
-    <a routerLink="" class="btn btn-default">Back</a>
-    <a class="btn btn-success right">Place Order</a>
 </div>

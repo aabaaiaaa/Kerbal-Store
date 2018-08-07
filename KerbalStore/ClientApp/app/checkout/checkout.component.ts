@@ -10,4 +10,8 @@ export class Checkout {
     constructor(private data: DataService) {
 
     }
+
+    onPlaceOrder() {
+        alert("Placing orders not possible at this time :)");
+    }
 }

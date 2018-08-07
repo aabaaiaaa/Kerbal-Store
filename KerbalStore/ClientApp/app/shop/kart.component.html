@@ -1,12 +1,31 @@
 ﻿<div class="well well-sm">
     <h3>Your Kart!</h3>
-    <div>Items in your Kart: {{data.Order.orderItems.length}}</div>
-    <div>Subtotal: {{data.Order.subtotal | currency:"GBP":true}}</div>
-    <div class="row well well-sm" *ngFor="let oi of data.Order.orderItems">
-        <div class="col-md-4 text-left">{{oi.rocketPartPartName}}</div>
-        <div class="col-md-1">{{oi.quantity}}</div>
-        <div class="col-md-4 text-right">{{(oi.unitPrice * oi.quantity) | currency:"GBP":true}}</div>
-        <button class="btn btn-default" (click)="removeOrderItem(oi)"><i class="fa fa-remove"></i></button>
-    </div>
+    <div>Different items in your Kart: {{data.Order.orderItems.length}}</div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Rocket Part</td>
+                <td>#</td>
+                <td>Cost</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let oi of this.data.Order.orderItems">
+                <td>{{oi.rocketPartPartName}}</td>
+                <td>{{oi.quantity}}</td>
+                <td>{{(oi.unitPrice * oi.quantity) | currency:"GBP":true}}</td>
+                <td><button class="btn btn-danger" (click)="removeOrderItem(oi)"><i class="fa fa-remove"></i></button></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Subtotal:</td>
+                <td>{{data.Order.subtotal | currency:"GBP":true}}</td>
+            </tr>
+        </tfoot>
+    </table>
     <button class="btn btn-success" (click)="onNavigate()" *ngIf="data.Order.orderItems.length > 0">Checkout</button>
+    
 </div>
