@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kerbal Store: @ViewBag.Title</title>
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <header class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand"><i class="fa fa-desktop">&nbsp;</i>Welcome to the Kerbal Store!</div>
+                <button class="navbar-toggle navbar-collapse" data-toggle="collapse" data-target="#menu">&#9776;</button>
+            </div>
+            <div id="menu" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="StorePage" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="StorePage" asp-action="Shop"><i class="fa fa-ship"></i> Browse Shop</a></li>
+                    <li><a asp-controller="StorePage" asp-action="RequestPart"><i class="fa fa-recycle"></i> Request Part</a></li>
+                    <li><a asp-controller="StorePage" asp-action="AboutUs">About Us</a></li>
+                    <li><a asp-controller="StorePage" asp-action="TestErrorPageUsingRazorPage">Pretty Error Page</a></li>
+                </ul>
+            </div>
+        </header>
+    </div>
+    <section class="container">
+        <div class="text-center">
+            <h2>@ViewBag.Title</h2>
+        </div>
+        @RenderBody()
+    </section>
+    <footer class="container col-md-6 col-md-offset-3">
+        <br />
+        <div class="text-center">Subject matter based on the game Kerbal Space Program, a space rocket construction and flight simulator that, in my opinion, has a rather cult-style following and is great fun to play! Though, most of the time you end up crashing into the planet or breaking on re-entry...</div>
+    </footer>
+
+    <script src="~/lib/jQuery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/product.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

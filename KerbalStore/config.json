@@ -1,0 +1,11 @@
+﻿{
+  "ConnectionStrings": {
+    "KerbalStoreConnectionString": "Data Source=(localdb)\\ProjectsV13;Database=KerbalStoreDb;Integrated Security=True;MultipleActiveResultSets=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "KerbalStore":  "Information"
+    }
+  }
+}

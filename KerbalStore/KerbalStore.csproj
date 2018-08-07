@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\checkout\checkout.component.ts" />
+    <None Remove="ClientApp\app\login\login.component.ts" />
+    <None Remove="ClientApp\app\shared\dataService.ts" />
+    <None Remove="ClientApp\app\shared\login.ts" />
+    <None Remove="ClientApp\app\shared\order.ts" />
+    <None Remove="ClientApp\app\shared\RocketPart.ts" />
+    <None Remove="ClientApp\app\shop\kart.component.ts" />
+    <None Remove="ClientApp\app\shop\rocketPartList.component.ts" />
+    <None Remove="ClientApp\app\shop\shop.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\ts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"></DotNetCliToolReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\checkout\checkout.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\login.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\order.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\rocketPart.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\dataService.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shop\kart.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shop\rocketPartList.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shop\shop.component.ts" />
+  </ItemGroup>
+
+</Project>

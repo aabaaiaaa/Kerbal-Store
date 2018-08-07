@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Buy all your KSP parts here! Totally safe every time...";
+}
+@section styles{
+    <link href="~/css/index.css" rel="stylesheet" />
+}
+<div class="row">
+    
+    <div class="col-md-6">
+        <div class="well well-sm">
+            <h3>To get this project working:</h3>
+            <ul>
+                <li>Visual Studio 2017 (15.6) with .Net Core 2.0 installed</li>
+                <li>npm and angular/cli versions setup
+                    <ul>
+                        <li>npm install -g npm@5.1.0</li>
+                        <li>npm cache clean --force</li>
+                        <li>npm install -g @@angular/cli@1.3.2</li>
+                    </ul>
+                </li>
+                <li>Run command from root of project: dotnet ef database update (you will need to review the connection string set in config.json)</li>
+                <li>Run command from root of project: ng build</li>
+                <li>CTRL+F5 from Visual Studio will make sure site is running in IIS Express (check ports)</li>
+            </ul>
+            <h3>Notes on project:</h3>
+            <ul>
+                <li>Built on ASP.Net Core, MVC, Entity Framework, with Bootstrap (3.3.7) for most and Angular (4.4.7) for some of the interfaces</li>
+                <li>bower is used to retrieve all JS dependencies like Bootstrap and various jquery libraries</li>
+                <li>Bootstrap is used throughout for layout (grid system) and styling inputs (buttons, links, content divs, navigation bar)</li>
+                <li><i class="glyphicon glyphicon-bitcoin"></i> Glyphicon and <i class="fa fa-address-book"></i> Font Awesome used via bower</li>
+                <li>TypeScript used for all Angular components, transpiled via ng build</li>
+                <li>Dependency injection used throughout - logger and data services mostly</li>
+                <li>No unit testing - DI would faciliate this process to be added later though</li>
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="col-md-6 well well-sm">
+        <h3>Interesting files:</h3>
+        <ul>
+            <li>
+                <strong>KerbalStore root</strong>
+                <ul>
+                    <li>
+                        <strong>wwwroot</strong> - <i>contains hosted files for site</i>
+                        <ul>
+                            <li><strong>ClientApp</strong> - <i>Angular site is built to this directory (via ng build)</i></li>
+                            <li><strong>lib</strong> - <i>bower will restore bower packages to this location</i></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>ClientApp</strong> - <i>source for Angular app, contains all the components and boiler plate Angular source files</i>
+                    </li>
+                    <li>
+                        <strong>Controllers</strong> - <i>various MVC controllers</i>
+                    </li>
+                    <li>
+                        <strong>Data</strong>
+                        <ul>
+                            <li><strong>Entities</strong> - <i>all EF related Models used within DbContext</i></li>
+                            <li>Interface files for Repositories and single DbContext implementation of them all</li>
+                            <li>Mapper profile for AutoMapper</li>
+                            <li>Seeding class for generating initial rocket parts, an order and a login for the site</li>
+                        </ul>
+                    </li>
+                    <li><strong>Models</strong> - <i>contains view models used for dealing with UI interaction with backend services/repositories, drives UI validation</i></li>
+                    <li><strong>Pages</strong> - <i>single Razor page for handling exceptions back to the user</i></li>
+                    <li><strong>Services</strong> - <i>single service class to show how they can be used to create abstraction layers</i></li>
+                    <li><strong>Views</strong> - <i>collection of views used by MVC</i></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+

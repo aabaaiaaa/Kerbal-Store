@@ -1,0 +1,15 @@
+﻿<div class="row">
+
+    <div class="col-md-4" *ngFor="let rp of RocketParts">
+        <div class="well well-sm">
+            <div class="product">
+                <h2 class="title">{{rp.partName}}</h2>
+                <img src="/img/rocket-engine-f-1.jpg" class="img-responsive" />
+                <p class="summary">[Product summary]</p>
+                <p class="price">Price {{rp.price | currency:"GBP":true}}</p>
+                <button id="buyBtn" class="btn btn-success" (click)="addToKart(rp)">Buy</button>
+            </div>
+        </div>
+    </div>
+
+</div>

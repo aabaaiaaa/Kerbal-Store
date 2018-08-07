@@ -1,0 +1,43 @@
+﻿@model RequestPartModel
+@{
+    ViewBag.Title = "Request A Part";
+}
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="col-md-6 col-md-offset-3">
+    <p>Page showing use of ASP.Net form validation based on MVC view models as well as feedback from ASP.Net on what was wrong with particular form elements.</p>
+    <p>Validation rules:</p>
+    <ul>
+        <li>Name is required</li>
+        <li>"Rocket Parts Required" textarea can only take 20 characters</li>
+    </ul>
+    <p>This also submits to a "ticket system" (basic table via EF), based on an interface that could serve that purpose.</p>
+</div>
+<div class="col-md-6 col-md-offset-3">
+    <div class="well">
+        <h2>Please use this form to request rocket parts we've not got in the store</h2>
+        <div class="contactUsForm">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-warning"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name">Name:</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RocketPart">Rocket Part Required:</label>
+                    <textarea asp-for="RocketPart" class="form-control"></textarea>
+                    <span asp-validation-for="RocketPart" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-mail-reply"></i> Send Message</button>
+                    <div class="text-success">@ViewBag.UserFeedback</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

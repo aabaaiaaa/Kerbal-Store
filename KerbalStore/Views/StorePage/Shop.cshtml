@@ -1,0 +1,16 @@
+﻿@model IEnumerable<RocketPart>
+@section scripts{ 
+<script src="~/ClientApp/dist/inline.bundle.js"></script>
+<script src="~/ClientApp/dist/polyfills.bundle.js"></script>
+<script src="~/ClientApp/dist/styles.bundle.js"></script>
+<script src="~/ClientApp/dist/vendor.bundle.js"></script>
+<script src="~/ClientApp/dist/main.bundle.js"></script>
+}
+<h2>Space Shop (Angular App)</h2>
+<p>Notes:</p>
+<ul>
+    <li>Uses Anuglar Routing via hash (#), navigating away form this page will reset any in memory Angular state like being logged in</li>
+    <li>You can add items to your "kart", same items up quantity and a subtotal is calculated on the fly</li>
+    <li>You will be asked to log in when clicking "checkout", username "jay" and password "test", remember me feature is not plumbed in</li>
+</ul>
+<kerbal-shop-app></kerbal-shop-app>
