@@ -1,4 +1,29 @@
 ﻿<div class="col-md-9">
     <h2>Checkout page</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Rocket Part</td>
+                <td>Quantity</td>
+                <td>Unit Price</td>
+                <td>Cost</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let oi of this.data.Order.orderItems">
+                <td>{{oi.rocketPartPartName}}</td>
+                <td>{{oi.quantity}}</td>
+                <td>{{oi.unitPrice | currency:"GBP":true}}</td>
+                <td>{{(oi.unitPrice * oi.quantity) | currency:"GBP":true}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Subtotal:</td>
+                <td>{{data.Order.subtotal | currency:"GBP":true}}</td>
+            </tr>
+        </tfoot>
+    </table>
     <a routerLink="" class="btn btn-default">Back</a>
+    <a class="btn btn-success right">Place Order</a>
 </div>
