@@ -23,6 +23,14 @@
                     <li><a asp-controller="StorePage" asp-action="RequestPart"><i class="fa fa-recycle"></i> Request Part</a></li>
                     <li><a asp-controller="StorePage" asp-action="AboutUs">About Us</a></li>
                     <li><a asp-controller="StorePage" asp-action="TestErrorPageUsingRazorPage">Pretty Error Page</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                    }
                 </ul>
             </div>
         </header>

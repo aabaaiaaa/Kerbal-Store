@@ -11,9 +11,10 @@ using System;
 namespace KerbalStore.Migrations
 {
     [DbContext(typeof(KerbalStoreContext))]
-    partial class KerbalStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20180808175707_IdentityForLogin")]
+    partial class IdentityForLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

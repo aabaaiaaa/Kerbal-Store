@@ -8,6 +8,7 @@ using KerbalStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,10 @@ namespace KerbalStore
             services.AddTransient<KerbalStoreSeeder>();
 
             services.AddTransient<ITicketService, TicketService>();
+
+            services.AddIdentity<ShopUser, IdentityRole>()
+                .AddEntityFrameworkStores<KerbalStoreContext>();
+
             services.AddMvc()
                 .AddJsonOptions(opt =>
                 {
@@ -62,6 +67,8 @@ namespace KerbalStore
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvc(cfg => {
                 cfg.MapRoute("Default", "{controller}/{action}/{id?}", new { controller = "StorePage", action = "Index" });
             });
@@ -72,7 +79,7 @@ namespace KerbalStore
                 using (var scopedContext = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scopedContext.ServiceProvider.GetService<KerbalStoreSeeder>();
-                    seeder.Seed();
+                    seeder.Seed().Wait();
                 }
             }
         }

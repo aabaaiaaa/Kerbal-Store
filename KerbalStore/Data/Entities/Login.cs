@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace KerbalStore.Data.Entities
 {
+    //TODO: remove after identity replaced implemented
     public class Login
     {
         public int Id { get; set; }

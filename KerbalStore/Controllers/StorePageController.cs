@@ -1,6 +1,7 @@
 ﻿using KerbalStore.Data;
 using KerbalStore.Models;
 using KerbalStore.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -56,6 +57,7 @@ namespace KerbalStore.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Shop()
         {
             //var results = kerbalStoreRepository.RocketParts.OrderBy(rp => rp.PartName).ToList();
