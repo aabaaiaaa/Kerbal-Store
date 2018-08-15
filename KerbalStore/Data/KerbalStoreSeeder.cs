@@ -68,14 +68,6 @@ namespace KerbalStore.Data
                 // Seed order item
                 kerbalStoreContext.Orders.Add(order);
 
-                // Seed login
-                var login = new Login()
-                {
-                    Username = "jay",
-                    Password = "test"
-                };
-                kerbalStoreContext.Logins.Add(login);
-
                 kerbalStoreContext.SaveChanges();
             }
         }

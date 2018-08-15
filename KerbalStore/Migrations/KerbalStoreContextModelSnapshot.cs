@@ -20,26 +20,6 @@ namespace KerbalStore.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("KerbalStore.Data.Entities.Login", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("LastLogin");
-
-                    b.Property<string>("Password");
-
-                    b.Property<string>("Token");
-
-                    b.Property<DateTime>("TokenExpiry");
-
-                    b.Property<string>("Username");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Logins");
-                });
-
             modelBuilder.Entity("KerbalStore.Data.Entities.Order", b =>
                 {
                     b.Property<int>("Id")

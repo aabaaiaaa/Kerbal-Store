@@ -18,9 +18,6 @@ namespace KerbalStore.Data
         public DbSet<RocketPart> RocketParts { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        //TODO: remove manual login system after identity server is implemented
-        public DbSet<Login> Logins { get; set; }
-
         public DbSet<Ticket> Tickets { get; set; }
     }
 }

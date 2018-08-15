@@ -51,7 +51,6 @@ namespace KerbalStore
             services.AddAutoMapper();
 
             services.AddScoped<IKerbalStoreRepository, KerbalStoreRepository>();
-            services.AddScoped<ILoginRepository, KerbalStoreRepository>();
             services.AddScoped<ITicketRepository, KerbalStoreRepository>();
             services.AddTransient<KerbalStoreSeeder>();
 
