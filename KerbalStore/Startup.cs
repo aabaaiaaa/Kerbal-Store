@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using KerbalStore.Data;
@@ -8,9 +9,11 @@ using KerbalStore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace KerbalStore
@@ -33,14 +36,29 @@ namespace KerbalStore
                 cfg.UseSqlServer(configuration.GetConnectionString("KerbalStoreConnectionString"));
             });
 
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                    {
+                        ValidAudience = configuration["Token:Audience"],
+                        ValidIssuer = configuration["Token:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Key"]))
+                    };
+                });
+
             services.AddAutoMapper();
 
             services.AddScoped<IKerbalStoreRepository, KerbalStoreRepository>();
-            services.AddScoped<ILoginRepository, KerbalStoreRepository>();
             services.AddScoped<ITicketRepository, KerbalStoreRepository>();
             services.AddTransient<KerbalStoreSeeder>();
 
             services.AddTransient<ITicketService, TicketService>();
+
+            services.AddIdentity<ShopUser, IdentityRole>()
+                .AddEntityFrameworkStores<KerbalStoreContext>();
+
             services.AddMvc()
                 .AddJsonOptions(opt =>
                 {
@@ -62,6 +80,8 @@ namespace KerbalStore
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvc(cfg => {
                 cfg.MapRoute("Default", "{controller}/{action}/{id?}", new { controller = "StorePage", action = "Index" });
             });
@@ -72,7 +92,7 @@ namespace KerbalStore
                 using (var scopedContext = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scopedContext.ServiceProvider.GetService<KerbalStoreSeeder>();
-                    seeder.Seed();
+                    seeder.Seed().Wait();
                 }
             }
         }

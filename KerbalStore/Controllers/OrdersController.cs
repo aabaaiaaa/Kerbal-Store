@@ -2,6 +2,8 @@
 using KerbalStore.Data;
 using KerbalStore.Data.Entities;
 using KerbalStore.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 namespace KerbalStore.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrdersController : Controller
     {
         private readonly IKerbalStoreRepository kerbalStoreRepository;

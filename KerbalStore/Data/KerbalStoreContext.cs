@@ -1,4 +1,5 @@
 ﻿using KerbalStore.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KerbalStore.Data
 {
-    public class KerbalStoreContext : DbContext
+    public class KerbalStoreContext : IdentityDbContext<ShopUser>
     {
         public KerbalStoreContext(DbContextOptions<KerbalStoreContext> dbContextOptions) : base(dbContextOptions)
         {
@@ -16,8 +17,6 @@ namespace KerbalStore.Data
 
         public DbSet<RocketPart> RocketParts { get; set; }
         public DbSet<Order> Orders { get; set; }
-
-        public DbSet<Login> Logins { get; set; }
 
         public DbSet<Ticket> Tickets { get; set; }
     }

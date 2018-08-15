@@ -1,4 +1,5 @@
 ﻿using KerbalStore.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,34 @@ namespace KerbalStore.Data
     public class KerbalStoreSeeder
     {
         private readonly KerbalStoreContext kerbalStoreContext;
+        private readonly UserManager<ShopUser> userManager;
 
-        public KerbalStoreSeeder(KerbalStoreContext kerbalStoreContext)
+        public KerbalStoreSeeder(KerbalStoreContext kerbalStoreContext, UserManager<ShopUser> userManager)
         {
             this.kerbalStoreContext = kerbalStoreContext;
+            this.userManager = userManager;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
             kerbalStoreContext.Database.EnsureCreated();
+
+            // Create development user
+            var user = await userManager.FindByNameAsync("jay");
+            if(user == null)
+            {
+                user = new ShopUser()
+                {
+                    UserName = "jay",
+                    Email = "jay@kerbal-shop.com"
+                };
+                var result = await userManager.CreateAsync(user, "P@ssw0rd!");
+                if (!result.Succeeded)
+                {
+                    throw new InvalidOperationException("failed to create test user");
+                }
+            }
+
 
             if (!kerbalStoreContext.RocketParts.Any())
             {
@@ -47,14 +67,6 @@ namespace KerbalStore.Data
 
                 // Seed order item
                 kerbalStoreContext.Orders.Add(order);
-
-                // Seed login
-                var login = new Login()
-                {
-                    Username = "jay",
-                    Password = "test"
-                };
-                kerbalStoreContext.Logins.Add(login);
 
                 kerbalStoreContext.SaveChanges();
             }

@@ -10,23 +10,6 @@ namespace KerbalStore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Logins",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LastLogin = table.Column<DateTime>(nullable: false),
-                    Password = table.Column<string>(nullable: true),
-                    Token = table.Column<string>(nullable: true),
-                    TokenExpiry = table.Column<DateTime>(nullable: false),
-                    Username = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logins", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -96,9 +79,6 @@ namespace KerbalStore.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Logins");
-
             migrationBuilder.DropTable(
                 name: "OrderItem");
 

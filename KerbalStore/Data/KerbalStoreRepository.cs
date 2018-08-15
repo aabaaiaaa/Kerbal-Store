@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KerbalStore.Data
 {
-    public class KerbalStoreRepository : IKerbalStoreRepository, ILoginRepository, ITicketRepository
+    public class KerbalStoreRepository : IKerbalStoreRepository, ITicketRepository
     {
         private readonly KerbalStoreContext kerbalStoreContext;
         private readonly ILogger<IKerbalStoreRepository> logger;
@@ -58,17 +58,6 @@ namespace KerbalStore.Data
         public IEnumerable<RocketPart> GetRocketPartsLessThanPrice(int price)
         {
             return kerbalStoreContext.RocketParts.Where(rp => rp.Price < price).OrderBy(rp => rp.Price).ToList();
-        }
-
-        public Login Login(Login creds)
-        {
-            creds.Token = "";
-            if (kerbalStoreContext.Logins.Where(l => l.Username == creds.Username && l.Password == creds.Password).Any())
-            {
-                creds.Token = new Guid().ToString();
-                creds.TokenExpiry = DateTime.Now.AddDays(1);
-            }
-            return creds;
         }
 
         public bool SaveAll()
