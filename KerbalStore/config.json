@@ -5,7 +5,12 @@
   "Logging": {
     "LogLevel": {
       "Default": "Warning",
-      "KerbalStore":  "Information"
+      "KerbalStore": "Information"
     }
+  },
+  "Token": {
+    "Key": "SJdhlaklsjhd adhsal djhwou h208028r0202h01je 1n d jd1£ !£",
+    "Issuer": "KSP Shop Orders API",
+    "Audience": "Order API users"
   }
 }
