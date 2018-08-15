@@ -22,12 +22,12 @@ export class DataService {
     }
 
     login(username:string, password:string): Observable<ILogin> {
-        return this.http.post("/api/Login", {
+        return this.http.post("/account/createtoken", {
             username: username,
             password: password
-        }).map((tokenDetails: ILogin) => {
+        }).map((tokenDetails: any) => {
             this.token = tokenDetails.token;
-            this.tokenExpiry = tokenDetails.tokenExpiry;
+            this.tokenExpiry = tokenDetails.expiration;
             return tokenDetails;
         });
     }
@@ -62,7 +62,19 @@ export class DataService {
     private token: string = "";
     private tokenExpiry: Date = new Date();
 
-    loginRequired(): boolean {
+    loginRequired(): Observable<boolean> {
+        if (!this.invalidStoredTokenDetails()) {
+            return new Observable<boolean>(observer => observer.next(this.invalidStoredTokenDetails()));
+        }
+        return this.http.get("/account/existingauthentication")
+            .map((data: any) => {
+                this.token = data.token;
+                this.tokenExpiry = data.expiration;
+                return false;
+            });
+    }
+
+    invalidStoredTokenDetails(): boolean {
         return this.token.length == 0 || this.tokenExpiry < new Date();
     }
 

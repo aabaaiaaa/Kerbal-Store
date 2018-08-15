@@ -57,7 +57,6 @@ namespace KerbalStore.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Shop()
         {
             //var results = kerbalStoreRepository.RocketParts.OrderBy(rp => rp.PartName).ToList();

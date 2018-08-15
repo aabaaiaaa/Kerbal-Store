@@ -17,12 +17,14 @@ export class Kart {
     }
 
     onNavigate() {
-        if (this.data.loginRequired()) {
-            // Nav to login component
-            this.router.navigate(["login"]);
-        } else {
-            // Nav to checkout
-            this.router.navigate(["checkout"]);
-        }
+        this.data.loginRequired().subscribe(loginRequired => {
+            if (loginRequired) {
+                // Nav to login component
+                this.router.navigate(["login"]);
+            } else {
+                // Nav to checkout
+                this.router.navigate(["checkout"]);
+            }
+        }, err => this.router.navigate(["login"]));
     }
 }

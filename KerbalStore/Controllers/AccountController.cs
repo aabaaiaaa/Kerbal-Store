@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using KerbalStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -81,6 +82,22 @@ namespace KerbalStore.Controllers
             }
         }
 
+        [Authorize]
+        public async Task<IActionResult> ExistingAuthentication()
+        {
+            // Should always be authenticated based on authroize attribute
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await userManager.FindByNameAsync(User.Identity.Name);
+                if(user != null)
+                {
+                    return Created("", GenerateJwtToken(user));
+                }
+            }
+
+            return BadRequest("Not logged in yet");
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
         {
@@ -92,36 +109,39 @@ namespace KerbalStore.Controllers
                     var result = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
                     if (result.Succeeded)
                     {
-                        // Create JWT bearer token
-                        var claims = new[] {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
-                        };
-
-                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:key"]));
-                        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-                        var token = new JwtSecurityToken(
-                            configuration["Token:Issuer"],
-                            configuration["Token:Audience"],
-                            claims,
-                            expires: DateTime.Now.AddMinutes(10),
-                            signingCredentials: creds
-                            );
-
-                        var results = new
-                        {
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo
-                        };
-
-                        return Created("", results);
+                        return Created("", GenerateJwtToken(user));
                     }
                 }
             }
 
             return BadRequest();
+        }
+
+        private object GenerateJwtToken(ShopUser user)
+        {
+            // Create JWT bearer token
+            var claims = new[] {
+                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                        };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                configuration["Token:Issuer"],
+                configuration["Token:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(10),
+                signingCredentials: creds
+                );
+
+            return new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            };
         }
     }
 }
