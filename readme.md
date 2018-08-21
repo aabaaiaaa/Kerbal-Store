@@ -11,7 +11,7 @@ What things you need to install the software and how to install them
 ```
 npm install -g npm@5.1.0
 npm cache clean --force
-npm install -g @@angular/cli@1.3.2
+npm install -g @angular/cli@1.3.2
 ```
 
 ## Installing Packages (bower/npm)
