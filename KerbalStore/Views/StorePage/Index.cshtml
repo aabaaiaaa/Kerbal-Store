@@ -18,9 +18,9 @@
                         <li>npm install -g @@angular/cli@1.3.2</li>
                     </ul>
                 </li>
-                <li>Open project in Visual Studio, it will then automatically install packages for bower/npm - <strong>this might take a while</strong></li>
-                <li>Run command from root of project: dotnet ef database update (you will need to review the connection string set in config.json)</li>
-                <li>Run command from root of project: ng build</li>
+                <li>Run (as administrator) "npm install" from the root directory of the project (not the solution directory)</li>
+                <li>Then run "ng build"</li>
+                <li>Open project in Visual Studio 2017, right-click on bower.config and "Restore Packages" (you can check the output for Bower/npm in Visual Studio) <strong>this might take a while</strong></li>
                 <li>CTRL+F5 from Visual Studio will make sure site is running in IIS Express (check ports)</li>
             </ul>
             <h3>Notes on project:</h3>
